@@ -1,0 +1,17 @@
+{
+  "name": "lesson02",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "cecil-su",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.15.3",
+    "open": "0.0.5",
+    "utility": "^1.12.0"
+  }
+}

@@ -19,18 +19,25 @@ superagent.get(imooc)
     var href = url.resolve(imooc, el.find('.course-card').attr('href'))
     items.push(href)
   })
-  console.log(items)
 
   var ep = new eventproxy()
   ep.after('imooc_html', items.length, function (lessons) {
+    lessons = lessons.map(function (lessonPair) {
+      // console.log(lessonPair)
+      var url = lessonPair[0]
+      var html = lessonPair[1]
+      var $ = cheerio.load(html)
+      return ({
+        title: $('.course-infos h2.l').text().trim(),
+        href: url
+      })
+    })
     console.log(lessons)
-    // lessons = lessons.map(function () {})
   })
 
   items.forEach(function (lesson) {
     superagent.get(lesson)
     .end(function (err, res) {
-      console.log('fetch' + lesson + 'successful')
       ep.emit('imooc_html', [lesson, res.text])
     })
   })
